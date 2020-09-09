@@ -9,15 +9,23 @@ contract Marketplace {
     uint id;
     string name;
     uint price;
-    address owner;
+    address payable owner;
     bool purchased;
     }
 
-    event ProductCreated(
+    event productCreated(
         uint id,
         string name,
         uint price,
-        address owner,
+        address payable owner,
+        bool purchased
+    );
+
+    event productPurchased(
+        uint id,
+        string name,
+        uint price,
+        address payable owner,
         bool purchased
     );
 
@@ -27,14 +35,46 @@ contract Marketplace {
 
     function createProduct(string memory _name, uint _price) public {
         // Require a valid name
-        //require(bytes(_name).lenght > 0);
+        require(bytes(_name).length > 0,'product name should not be empty');
         // Require a valid price
-        require(_price > 0);
+        require(_price > 0,'product price should not be empty');
         // Increment product productCount
         productCount ++;
         // Create the product
         products[productCount] = Product(productCount, _name, _price, msg.sender, false);
         // Trigger on event
-        emit ProductCreated(productCount, _name, _price, msg.sender, false);
+        emit productCreated(productCount, _name, _price, msg.sender, false);
+    }
+
+    function purchaseProduct(uint _id) public payable{
+
+        //Get data
+        Product memory _product = products[_id]; //Fetch the product
+        address payable _seller = _product.owner; //Fetch the product
+
+        //Pre-Checks for valid data
+        //Check valid id
+        require(_product.id > 0 && _product.id <= productCount, 'Invalid product id');
+        //Check enough ehter in transaction
+        require(msg.value >= _product.price,'not enough ether');
+        //Check product is not purchased
+        require(!_product.purchased,'already purchased');
+        //Check buyer is not seller
+        require(_seller != msg.sender,'cannot buy owned product');
+
+        //Update data
+        //Transfer Ownership
+        _product.owner = _seller;
+        //Mark Purchased
+        _product.purchased = true;
+        //Update product
+        products[_id] = _product;
+
+        //Transfer Funds
+        //Pay the seller by sending ether
+        address(_seller).transfer(msg.value);
+
+        // Trigger on event
+        emit productPurchased(productCount, _product.name, _product.price, msg.sender, true);
     }
 }
