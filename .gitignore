@@ -17,3 +17,25 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
+
+#for front-end /marketplace-client/
+
+# dependencies
+/marketplace-client/node_modules
+
+# production
+/marketplace-client/build
+/marketplace-client/src/contracts
+
+# misc
+/marketplace-client/.DS_Store
+/marketplace-client/.env.local
+/marketplace-client/.env.development.local
+/marketplace-client/.env.test.local
+/marketplace-client/.env.production.local
+
+/marketplace-client/npm-debug.log*
+/marketplace-client/yarn-debug.log*
+/marketplace-client/yarn.lock
+/marketplace-client/yarn-error.log*
+/marketplace-client/package-lock.json

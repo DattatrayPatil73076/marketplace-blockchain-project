@@ -20,7 +20,7 @@ contract(Marketplace, ([deployer, seller, buyer]) => {
 
     it("it has name", async () => {
       const name = await marketplace.name();
-      assert.equal(name, "Dapp University Marketplace");
+      assert.equal(name, "Marketplace Blockchain Project");
     });
   });
 
