@@ -2,6 +2,8 @@
 
 This is Simple demo Project to Understand blockchain developement with truffle & react to create blockchain based marketplace to sell & puchase product.
 
+![alt text](https://github.com/DattatrayPatil73076/marketplace-blockchain-project/blob/master/Marketplace%20Blockchain%20Project.png?raw=true)
+
 ## Requirements
 
 1. required Node, NPM Installed, To Check:
