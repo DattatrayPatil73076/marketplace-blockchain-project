@@ -9,6 +9,8 @@ contract(Marketplace, ([deployer, seller, buyer]) => {
     marketplace = await Marketplace.deployed();
   });
 
+  //console.log(deployer, seller, buyer);
+
   describe("deployment", async () => {
     it("deploys successfully", async () => {
       const address = await marketplace.address;

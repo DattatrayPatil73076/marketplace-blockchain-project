@@ -64,7 +64,7 @@ contract Marketplace {
 
         //Update data
         //Transfer Ownership
-        _product.owner = _seller;
+        _product.owner = msg.sender;
         //Mark Purchased
         _product.purchased = true;
         //Update product
